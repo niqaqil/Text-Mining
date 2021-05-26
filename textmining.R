@@ -16,7 +16,7 @@ library("ggplot2")
 
 
 # Read the text file from local machine , choose file interactively
-text <- readLines(file.choose())
+text <- readLines(file.choose()) # After run this line choose a text file for data
 # Load the data as a corpus
 TextDoc <- Corpus(VectorSource(text))
 
@@ -64,7 +64,7 @@ wordcloud(words = dtm_d$word, freq = dtm_d$freq, min.freq = 5,
 
 
 # Find associations 
-findAssocs(TextDoc_dtm, terms = c("emot","feel","can"), corlimit = 0.01)
+findAssocs(TextDoc_dtm, terms = c("emot","feel","can"), corlimit = 0.01)   # For this, change string to top 3 word with highest frequency
 
 # Find associations for words that occur at least 50 times
 findAssocs(TextDoc_dtm, terms = findFreqTerms(TextDoc_dtm, lowfreq = 50), corlimit = 0.25)
@@ -107,7 +107,9 @@ head (d,10)
 #transpose
 td<-data.frame(t(d))
 #The function rowSums computes column sums across rows for each level of a grouping variable.
-td_new <- data.frame(rowSums(td[1]))
+td_new <- data.frame(rowSums(td[1])) # This one actually has many columns and we have to sum all the columns, but aku punya text file tak dapat output tu.
+# The actual code:
+# td_new <- data.frame(rowSums(td[1:lastcolumn]))
 #Transformation and cleaning
 names(td_new)[1] <- "count"
 td_new <- cbind("sentiment" = rownames(td_new), td_new)
